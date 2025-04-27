@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plant Care & Organic Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+<body class="bg-green-50 text-gray-800">
+
+<header class="relative bg-green-600">
+  <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" class="w-full h-96 object-cover opacity-60">
+  <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
+    <h1 class="text-4xl md:text-6xl font-bold">Grow Green, Live Organic 🌱</h1>
+    <p class="mt-4 text-xl">Your complete guide to healthier plants and better living!</p>
+    <a href="#shop" class="mt-6 bg-white text-green-700 font-semibold px-6 py-2 rounded-full hover:bg-green-100 transition">Explore Products</a>
+  </div>
+</header>
+
+<!-- Features Section -->
+<section class="py-16 px-8">
+  <h2 class="text-3xl font-bold text-center text-green-700 mb-10">Why Choose Us?</h2>
+  <div class="grid md:grid-cols-3 gap-10">
+    
+    <!-- Plant Care Tips with upload -->
+    <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition flex flex-col items-center text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/2909/2909769.png" alt="Plant Care" class="w-20 mb-4">
+      <h3 class="text-xl font-semibold mb-2">Plant Care Tips</h3>
+      <p class="mb-4">Scan your plant and get a complete care guide!</p>
+      <form id="plant-form" enctype="multipart/form-data">
+        <input type="file" id="plant-image" name="plant" accept="image/*" required class="mb-2">
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition">Scan Plant</button>
+      </form>
+      <div id="plant-result" class="mt-4 text-left text-green-700"></div>
+    </div>
+
+    <!-- Find Organic Stores -->
+    <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition flex flex-col items-center text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/2784/2784460.png" alt="Organic Shops" class="w-20 mb-4">
+      <h3 class="text-xl font-semibold mb-2">Find Organic Stores</h3>
+      <p class="mb-4">Find nearby organic shops easily!</p>
+      <button onclick="findStores()" class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition">Find Stores</button>
+      <ul id="store-list" class="mt-4 text-green-700"></ul>
+    </div>
+
+    <!-- Community Support -->
+    <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition flex flex-col items-center text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/1995/1995505.png" alt="Community" class="w-20 mb-4">
+      <h3 class="text-xl font-semibold mb-2">Community Support</h3>
+      <p>Ask questions, share success stories, and grow together with other plant lovers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEW SECTION: Buy Organic Fertilizers and Nutrients -->
+<section class="py-16 px-8 bg-white">
+  <h2 class="text-3xl font-bold text-center text-green-700 mb-10">Buy Organic Fertilizers & Nutrients 🌿</h2>
+  <div class="grid md:grid-cols-3 gap-10">
+    
+    <!-- Product 1 -->
+    <div class="bg-green-100 p-6 rounded-2xl shadow hover:shadow-lg transition flex flex-col items-center text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/2909/2909763.png" alt="Organic Fertilizer" class="w-20 mb-4">
+      <h3 class="text-xl font-semibold mb-2">Organic Plant Fertilizer</h3>
+      <p class="mb-4">Boost your plant growth naturally with 100% organic fertilizer.</p>
+      <button class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition">Buy Now</button>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="bg-green-100 p-6 rounded-2xl shadow hover:shadow-lg transition flex flex-col items-center text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/2909/2909765.png" alt="Nutrient Pack" class="w-20 mb-4">
+      <h3 class="text-xl font-semibold mb-2">Nutrient Booster Pack</h3>
+      <p class="mb-4">Special nutrient mix for flowering and fruiting plants.</p>
+      <button class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition">Buy Now</button>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="bg-green-100 p-6 rounded-2xl shadow hover:shadow-lg transition flex flex-col items-center text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/2909/2909764.png" alt="Neem Oil" class="w-20 mb-4">
+      <h3 class="text-xl font-semibold mb-2">Neem Oil Spray</h3>
+      <p class="mb-4">Organic pest control and leaf shine for healthy plants.</p>
+      <button class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition">Buy Now</button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+// Fake plant care data
+const plantCareData = {
+  "default": {
+    plantName: "Fiddle Leaf Fig",
+    nutrition: "Use nitrogen-rich fertilizer once a month.",
+    waterSunlight: "Water weekly. Needs bright, indirect sunlight.",
+    weather: "Best in 18-24°C. Avoid cold drafts.",
+    facts: "Known for improving indoor air quality.",
+    blogVideo: "https://example.com/fiddle-leaf-fig-care-guide",
+    products: ["Organic Potting Soil", "Neem Oil Spray", "Liquid Fertilizer"]
+  }
+};
+
+// Handle Plant Scan Form
+document.getElementById('plant-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  // Simulate scan (no real backend now)
+  const data = plantCareData.default;
+  
+  const resultDiv = document.getElementById('plant-result');
+  resultDiv.innerHTML = `
+    <h4 class="text-2xl font-bold mb-2">Plant Care Report 🌿</h4>
+    <p><strong>Plant Name:</strong> ${data.plantName}</p>
+    <p><strong>Proper Nutrition:</strong> ${data.nutrition}</p>
+    <p><strong>Water & Sunlight:</strong> ${data.waterSunlight}</p>
+    <p><strong>Weather Conditions:</strong> ${data.weather}</p>
+    <p><strong>Knowledgeable Facts:</strong> ${data.facts}</p>
+    <p><strong>Related Blog/Video:</strong> <a href="${data.blogVideo}" target="_blank" class="text-blue-600 underline">Learn More</a></p>
+    <p><strong>Suggested Products:</strong> ${data.products.join(", ")}</p>
+  `;
+});
+
+// FIND STORES FUNCTION
+function findStores() {
+  // Simulate some dummy stores around Jaipur
+  const stores = [
+    { name: "Jaipur Organic Mart" },
+    { name: "Green Earth Organics" },
+    { name: "Nature's Basket Jaipur" },
+    { name: "Organic Fields Store" }
+  ];
+  
+  const list = document.getElementById('store-list');
+  list.innerHTML = '';
+  stores.forEach(store => {
+    const li = document.createElement('li');
+    li.textContent = store.name;
+    list.appendChild(li);
+  });
+}
+</script>
+<!-- <py-script>
+src
+</py-script> -->
+
+</body>
+</html>
+
+
